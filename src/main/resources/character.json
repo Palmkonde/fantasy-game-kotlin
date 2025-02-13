@@ -1,0 +1,20 @@
+[
+  {
+    "type": "Warrior",
+    "name": "Thorne Ironfist",
+    "health": 100,
+    "attackPower": 1,
+    "stamina": 1,
+    "defensePower": 1,
+    "level": "LEVEL_1"
+  },
+  {
+    "type": "Sorcerer",
+    "name": "Eldrin Starfire",
+    "health": 50,
+    "attackPower": 1,
+    "mana": 1,
+    "healingPower": 1,
+    "level": "LEVEL_1"
+  }
+]
