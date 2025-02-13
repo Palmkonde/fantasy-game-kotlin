@@ -2,6 +2,9 @@ package com.fantasy.models
 
 import com.fantasy.interfaces.Character
 import com.fantasy.interfaces.Healer
+import io.github.oshai.kotlinlogging.KotlinLogging
+
+private val logger = KotlinLogging.logger {  }
 
 class Sorcerer(
     name: String,
@@ -21,21 +24,23 @@ class Sorcerer(
     init {
         val totalPoints = attackPower + mana + healingPower
         require(totalPoints <= level.points) {
-            "Invaild totalPoints: $totalPoints only allowed ${level.points} at ${level.name}"
+            logger.error {
+                "Invaild totalPoints: $totalPoints only allowed ${level.points} at ${level.name}"
+            }
         }
     }
 
     override fun attack(target: Character){
         if(!isAlive) {
-            println("$name is dead and cannot attack")
+            logger.info { "$name is dead and cannot attack" }
             return
         }
         if(mana <= 0){
-            println("$name is too tired to attack")
+            logger.info { "$name is too tired to attack" }
             return
         }
         else {
-            println("$name casts a spell at ${target.name}")
+            logger.info { "$name casts a spell at ${target.name}" }
             target.receiveAttack(attackPower)
             currnetMana -= 1
             this.heal()
@@ -45,10 +50,11 @@ class Sorcerer(
     override fun heal() {
         if(currnetMana <= 0) {
             println("$name is out of mana")
+            logger.info { "$name is out of mana "}
         }
         else if(currnetMana > 0) {
             currentHealth += healingPower
-            println("$name heals self to $currentHealth health")
+            logger.info { "$name heals self to $currentHealth health "}
             currnetMana -= 1
         }
     }
@@ -65,4 +71,3 @@ class Sorcerer(
         return super.toString()
     }
 }
-

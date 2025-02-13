@@ -1,6 +1,9 @@
 package com.fantasy.models
 
 import com.fantasy.interfaces.Character
+import io.github.oshai.kotlinlogging.KotlinLogging
+
+private val logger = KotlinLogging.logger {  }
 
 class Match(
     private val rounds: Int,
@@ -11,6 +14,7 @@ class Match(
         var round = 1
         while( challenger.health > 0 && opponent.health > 0 && round <= rounds) {
             println("\nROUND $round:")
+            logger.info { "\nROUND $round:" }
 
             challenger.beforeRounds()
             opponent.beforeRounds()

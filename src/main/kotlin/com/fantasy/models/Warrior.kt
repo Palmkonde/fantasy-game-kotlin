@@ -2,7 +2,10 @@ package com.fantasy.models
 
 import com.fantasy.interfaces.Character
 import com.fantasy.interfaces.Defender
+import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlin.math.max
+
+private val logger = KotlinLogging.logger {  }
 
 class Warrior(
     name: String,
@@ -22,21 +25,23 @@ class Warrior(
     init {
         val totalPoints = attackPower + currentStamina + defensePower
         require(totalPoints <= level.points) {
-            "Invaild totalPoints: $totalPoints only allowed ${level.points} at ${level.name}"
+            logger.error {
+                "Invaild totalPoints: $totalPoints only allowed ${level.points} at ${level.name}"
+            }
         }
     }
 
     override fun attack(target: Character){
         if(!isAlive) {
-            println("$name is dead and cannot attack")
+            logger.info{"$name is dead and cannot attack"}
             return
         }
         if(currentStamina<= 0){
-            println("$name is too tired to attack")
+            logger.info{"$name is too tired to attack"}
             return
         }
         else {
-            println("$name swings a sword at ${target.name}")
+            logger.info{"$name swings a sword at ${target.name}"}
             target.receiveAttack(attackPower)
             currentStamina -= 1
         }
@@ -46,12 +51,12 @@ class Warrior(
         val result = max(0, attackPower - defensePower)
 
         if(currentStamina <= 0) {
-            println("$name is too tired to defend")
+            logger.info{"$name is too tired to defend"}
             return attackPower
         }
 
         else if(currentStamina > 0) {
-            println("$name raises shield and defends against $defensePower damage")
+            logger.info{"$name raises shield and defends against $defensePower damage"}
             currentStamina -= 1
             return result
         }
