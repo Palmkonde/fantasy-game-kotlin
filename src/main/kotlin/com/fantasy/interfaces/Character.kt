@@ -1,6 +1,9 @@
 package com.fantasy.interfaces
 
 import com.fantasy.models.CharacterLevel
+import io.github.oshai.kotlinlogging.KotlinLogging
+
+private val logger = KotlinLogging.logger {  }
 
 abstract class Character(
     open val name: String,
@@ -18,12 +21,16 @@ abstract class Character(
         currentHealth -= attackPower
 
         if(currentHealth <= 0) {
-            println("$name has been defeated")
+            logger.info{ "$name has been defeated" }
             currentHealth = 0
         }
         else {
-            println("$name has $currentHealth remaining")
+            logger.info { "$name has $currentHealth remaining" }
         }
+    }
+
+    open fun getHealth(): Int {
+        return this.currentHealth
     }
 
     abstract fun attack(target: Character)

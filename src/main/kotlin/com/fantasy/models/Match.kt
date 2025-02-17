@@ -12,7 +12,7 @@ class Match(
 ) {
      fun fight(): Character? {
         var round = 1
-        while( challenger.health > 0 && opponent.health > 0 && round <= rounds) {
+        while( challenger.getHealth() > 0 && opponent.getHealth() > 0 && round <= rounds) {
             println("\nROUND $round:")
             logger.info { "\nROUND $round:" }
 
@@ -28,8 +28,8 @@ class Match(
             round++
         }
         when {
-            challenger.health <= 0 && opponent.health > 0 -> return opponent
-            opponent.health <= 0 && challenger.health > 0 -> return challenger
+            challenger.getHealth() <= 0 && opponent.getHealth() > 0 -> return opponent
+            opponent.getHealth() <= 0 && challenger.getHealth() > 0 -> return challenger
             else -> return null
         }
     }
