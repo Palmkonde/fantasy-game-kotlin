@@ -93,7 +93,7 @@ internal class RandomMatchService(
         val opponent = service.findOpponent(challenger)
 
         var round = 1
-        while( challenger.getHealth()> 0 && opponent.getHealth() > 0 && round <= rounds) {
+        while( challenger.getCurrentHeath() > 0 && opponent.getCurrentHeath() > 0 && round <= rounds) {
             println("\nROUND $round:")
 
             challenger.beforeRounds()
@@ -105,8 +105,8 @@ internal class RandomMatchService(
             round++
         }
         val winner: Character? = when {
-                challenger.getHealth() <= 0 && opponent.getHealth() > 0 -> opponent
-                opponent.getHealth() <= 0 && challenger.getHealth() > 0 -> challenger
+                challenger.getCurrentHeath() <= 0 && opponent.getCurrentHeath() > 0 -> opponent
+                opponent.getCurrentHeath() <= 0 && challenger.getCurrentHeath() > 0 -> challenger
                 else -> null
             }
 

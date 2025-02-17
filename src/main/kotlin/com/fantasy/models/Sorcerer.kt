@@ -52,7 +52,7 @@ class Sorcerer(
             println("$name is out of mana")
             logger.info { "$name is out of mana "}
         }
-        else if(currnetMana > 0) {
+        else if(currnetMana > 0 && currentHealth < health) {
             currentHealth += healingPower
             logger.info { "$name heals self to $currentHealth health "}
             currnetMana -= 1

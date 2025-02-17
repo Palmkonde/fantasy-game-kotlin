@@ -29,7 +29,7 @@ abstract class Character(
         }
     }
 
-    open fun getHealth(): Int {
+    open fun getCurrentHeath(): Int {
         return this.currentHealth
     }
 
