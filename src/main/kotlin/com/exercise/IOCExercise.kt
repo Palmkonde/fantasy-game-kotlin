@@ -2,7 +2,9 @@ package com.exercise
 
 import com.fantasy.models.*
 import com.fantasy.interfaces.*
-import kotlin.math.round
+import io.github.oshai.kotlinlogging.KotlinLogging
+
+private val logger = KotlinLogging.logger {  }
 
 internal data class CharacterMatchingStrategy(
     val name: String?,
@@ -73,15 +75,15 @@ internal class MatchResult(
     private val winner: Character?
 ) {
     fun getResult() {
-        println("Challenger: ${challenger.name} vs Opponent: ${opponent.name}")
+        logger.info {"Challenger: ${challenger.name} vs Opponent: ${opponent.name}"}
 
         if(winner == null){
-            println("\n\nDRAW!!")
+            logger.info {"\n\nDRAW!!"}
             return
         }
 
-        println("\n\nWinner: ${winner.name} health left: ${winner.health}")
-        println("Used round: $rounds")
+        logger.info{"\n\nWinner: ${winner.name} health left: ${winner.health}"}
+        logger.info{"Used round: $rounds"}
     }
 }
 
@@ -93,8 +95,9 @@ internal class RandomMatchService(
         val opponent = service.findOpponent(challenger)
 
         var round = 1
+
         while( challenger.getCurrentHeath() > 0 && opponent.getCurrentHeath() > 0 && round <= rounds) {
-            println("\nROUND $round:")
+            logger.info{"\nROUND $round:"}
 
             challenger.beforeRounds()
             opponent.beforeRounds()
