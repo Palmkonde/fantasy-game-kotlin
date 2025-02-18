@@ -19,7 +19,7 @@ class Sorcerer(
     attackPower=attackPower,
     level = level
 ), Healer {
-    private var currnetMana = mana
+    private var currentMana = mana
 
     init {
         val totalPoints = attackPower + mana + healingPower
@@ -42,25 +42,26 @@ class Sorcerer(
         else {
             logger.info { "$name casts a spell at ${target.name}" }
             target.receiveAttack(attackPower)
-            currnetMana -= 1
+            currentMana--
             this.heal()
         }
     }
 
     override fun heal() {
-        if(currnetMana <= 0) {
+        if(currentMana <= 0) {
+            currentMana = 0
             println("$name is out of mana")
             logger.info { "$name is out of mana "}
         }
-        else if(currnetMana > 0 && currentHealth < health) {
+        else if(currentMana > 0 && currentHealth < health) {
             currentHealth += healingPower
             logger.info { "$name heals self to $currentHealth health "}
-            currnetMana -= 1
+            currentMana -= 2
         }
     }
 
     override fun beforeRounds() {
-        currnetMana++
+        currentMana++
     }
 
     override fun afterRound() {
