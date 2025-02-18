@@ -6,16 +6,6 @@ import io.github.oshai.kotlinlogging.KotlinLogging
 
 private val logger = KotlinLogging.logger { }
 
-internal data class CharacterMatchingStrategy(
-    val name: String?,
-    val level: CharacterLevel?,
-    val characterClass: String?
-) {
-    companion object {
-        val ANY = CharacterMatchingStrategy(null, null, null)
-    }
-}
-
 internal object CharacterRepository {
 
     private val harryPotterCharacters = listOf(

@@ -5,6 +5,9 @@ import io.github.oshai.kotlinlogging.KotlinLogging
 
 private val logger = KotlinLogging.logger {  }
 
+// May be this one don't have to use it anymore??
+// Use in services instead?
+
 class Match(
     private val rounds: Int,
     private val challenger: Character,
